@@ -1,14 +1,10 @@
 const express = require("express");
 const path = require("path");
+const logger = require("./middleware/logger");
 const members = require("./Members");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-const logger = (req, res, next) => {
-  console.log("Hello");
-  next();
-};
 
 // Init middleware
 app.use(logger);
