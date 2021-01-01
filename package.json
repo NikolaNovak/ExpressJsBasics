@@ -1,0 +1,23 @@
+{
+  "name": "ExpressJsBasics",
+  "version": "1.0.0",
+  "description": "Learning Express JS Basics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikolaNovak/ExpressJsBasics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikolaNovak/ExpressJsBasics/issues"
+  },
+  "homepage": "https://github.com/NikolaNovak/ExpressJsBasics#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
