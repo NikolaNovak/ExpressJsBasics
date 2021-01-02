@@ -10,8 +10,11 @@ router.get("/", (req, res) => res.json(members));
 router.get("/:id", (req, res) => {
   const found = members.some((member) => member.id === +req.params.id);
 
-  if (found) res.json(members.filter((member) => member.id === +req.params.id));
-  else res.status(400).json({ msg: `Member with ID ${req.params.id} not found` });
+  if (found) {
+    res.json(members.filter((member) => member.id === +req.params.id));
+  } else {
+    res.status(400).json({ msg: `Member with ID ${req.params.id} not found` });
+  }
 });
 
 // Create new member
@@ -22,6 +25,23 @@ router.post("/", (req, res) => {
   } else {
     members.push(newMember);
     res.json(members);
+  }
+});
+
+// Update member
+router.put("/:id", (req, res) => {
+  const index = members.findIndex((member) => member.id === +req.params.id);
+
+  if (index !== -1) {
+    const member = members[index];
+    const updatedMember = req.body;
+
+    member.name = updatedMember.name ? updatedMember.name : member.name;
+    member.email = updatedMember.email ? updatedMember.email : member.email;
+
+    res.json({ msg: "Member updated", member });
+  } else {
+    res.status(400).json({ msg: `Member with ID ${req.params.id} not found` });
   }
 });
 
