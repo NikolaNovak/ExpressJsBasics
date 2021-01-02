@@ -1,7 +1,7 @@
 const express = require("express");
 const uuid = require("uuid");
 const router = express.Router();
-const members = require("../../Members");
+let members = require("../../Members");
 
 // Get all members
 router.get("/", (req, res) => res.json(members));
@@ -39,7 +39,24 @@ router.put("/:id", (req, res) => {
     member.name = updatedMember.name ? updatedMember.name : member.name;
     member.email = updatedMember.email ? updatedMember.email : member.email;
 
-    res.json({ msg: "Member updated", member });
+    res.json({ msg: `Member with ID ${req.params.id} updated`, member });
+  } else {
+    res.status(400).json({ msg: `Member with ID ${req.params.id} not found` });
+  }
+});
+
+// Delete member
+router.delete("/:id", (req, res) => {
+  const found = members.some((member) => member.id === +req.params.id);
+
+  if (found) {
+    const updatedMembers = members.filter((member) => member.id !== +req.params.id);
+    members = updatedMembers;
+
+    res.json({
+      msg: `Member with ID ${req.params.id} deleted`,
+      members,
+    });
   } else {
     res.status(400).json({ msg: `Member with ID ${req.params.id} not found` });
   }
