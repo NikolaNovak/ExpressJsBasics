@@ -25,6 +25,7 @@ router.post("/", (req, res) => {
   } else {
     members.push(newMember);
     res.json(members);
+    // res.redirect("/"); to refresh the index page for the members list to update
   }
 });
 
